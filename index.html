@@ -144,8 +144,20 @@
         nav { display: flex; align-items: center; justify-content: center !important; gap: 20px; padding: 25px 0; }
         
         .brand { display: flex; align-items: center; gap: 24px; font-weight: 900; font-size: 3.5rem; }
+        
+        /* تنسيق وتأثير حركة اسم "بن دهب" أعلى الصفحة */
+        .animated-brand-text {
+            font-family: "Playfair Display", serif;
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(214, 168, 79, 0.5));
+            animation: shineAndPulse 1.5s ease-in-out infinite alternate;
+            display: inline-block;
+        }
+
         .mark { display: grid; place-items: center; width: 100px; height: 100px; border: 3px solid var(--dark); border-radius: 50%; background: var(--gold); font-family: "Playfair Display", serif; font-size: 2rem; box-shadow: 6px 6px 0 var(--dark); }
-        .brand small { display: block; color: var(--muted); font-size: 1.2rem; }
+        .brand small { display: block; color: var(--muted); font-size: 1.2rem; font-family: Cairo, sans-serif; -webkit-text-fill-color: var(--muted); filter: none; }
         
         .links { display: flex; gap: 25px; color: var(--muted); font-weight: 700; }
         .order, .button { display: inline-flex; align-items: center; gap: 8px; padding: 11px 17px; border: 2px solid var(--dark); border-radius: 6px; background: var(--dark); color: var(--cream); font-weight: 800; box-shadow: 4px 4px 0 var(--gold); }
@@ -172,7 +184,7 @@
         .menu-dropdown summary { list-style: none; cursor: pointer; }
         .menu-dropdown summary::-webkit-details-marker { display: none; }
         
-        /* قائمة الخيارات الثلاثة */
+        /* قائمة الخيارات المنسدلة */
         .quick-menu { 
             position: absolute; 
             z-index: 4; 
@@ -185,15 +197,66 @@
             background: var(--cream); 
             box-shadow: 5px 5px 0 var(--dark); 
         }
-        .quick-menu a { 
+        .quick-menu > a { 
             display: block; 
             padding: 10px; 
             border-bottom: 1px solid #d9cbb8; 
             font-weight: 800; 
             color: var(--dark);
         }
-        .quick-menu a:last-child { border-bottom: 0; }
-        .quick-menu a:hover { background: var(--soft); color: var(--brown); }
+        .quick-menu > a:last-child { border-bottom: 0; }
+        .quick-menu > a:hover { background: var(--soft); color: var(--brown); }
+
+        /* تنسيق العناصر القابلة للتوسيع الجانبي */
+        .submenu-container {
+            position: relative;
+            border-bottom: 1px solid #d9cbb8;
+        }
+        .submenu-container:hover .sub-dropdown {
+            display: flex;
+        }
+        .submenu-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            font-weight: 800;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        .submenu-trigger:hover {
+            background: var(--soft);
+            color: var(--brown);
+        }
+        .sub-dropdown {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 100%;
+            width: 170px;
+            background: var(--cream);
+            border: 2px solid var(--dark);
+            border-radius: 6px;
+            box-shadow: 5px 5px 0 var(--dark);
+            padding: 10px;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            z-index: 5;
+        }
+        .sub-dropdown div {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 6px;
+            border-bottom: 1px dotted #d9cbb8;
+        }
+        .sub-dropdown div:last-child {
+            border-bottom: none;
+        }
+        .sub-dropdown span {
+            color: var(--brown);
+        }
 
         .contact-float { position: fixed; left: 20px; bottom: 20px; z-index: 10; display: flex; flex-direction: column; gap: 12px; }
         .contact-float a { position: relative; display: grid; place-items: center; width: 54px; height: 54px; border: 2px solid var(--dark); border-radius: 50%; color: #fff; font-size: 1.4rem; box-shadow: 4px 4px 0 var(--dark); transition: transform .2s ease, box-shadow .2s ease; }
@@ -206,7 +269,6 @@
         @keyframes pulse { 0%, 45% { opacity: 0; transform: scale(.8); } 18% { opacity: .65; } 38% { opacity: 0; transform: scale(1.2); } }
         @keyframes ring { 0%, 65%, 100% { transform: rotate(0); } 68%, 76%, 84% { transform: rotate(-14deg); } 72%, 80% { transform: rotate(14deg); } }
         @keyframes bounce { 0%, 65%, 100% { transform: translateY(0); } 74% { transform: translateY(-4px); } 82% { transform: translateY(0); } }
-        .underlined { border-bottom: 2px solid var(--gold); font-weight: 800; }
         
         .visual { position: relative; min-height: 400px; display: grid; place-items: center; }
         .visual::before { content: ""; position: absolute; width: 350px; height: 350px; border: 2px solid var(--gold); border-radius: 50%; background: var(--soft); }
@@ -226,10 +288,6 @@
         .card p { margin-top: 7px; color: var(--muted); font-size: .9rem; }
         .card:nth-child(2) p { color: #ead7bd; }
         .card:nth-child(3) p { color: var(--dark); }
-        .menu { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 45px; padding: 25px 0; border-top: 2px solid var(--dark); border-bottom: 2px solid var(--dark); }
-        .item { display: flex; gap: 10px; align-items: baseline; padding: 10px 0; border-bottom: 1px dashed #cbbda9; }
-        .item span { flex: 1; border-bottom: 2px dotted #cbbda9; }
-        .item b { color: var(--brown); white-space: nowrap; }
         
         /* تنسيق الفوتر الجديد وتوزيع العناصر بدقة */
         footer { margin-top: 80px; padding: 35px max(20px, calc((100% - 1120px) / 2)); background: var(--dark); color: var(--cream); display: flex; justify-content: space-between; align-items: center; gap: 20px; }
@@ -247,7 +305,6 @@
         .footer-phone { font-size: 1.1rem; font-weight: 700; color: var(--gold); display: inline-flex; align-items: center; gap: 6px; }
         .footer-phone i { font-size: 1rem; }
 
-        /* تنسيق قسم Mega-IT الأنيق والصغير أقصى اليسار مع لون أحمر لأيقونة الاتصال */
         .footer-dev {
             display: flex;
             flex-direction: column;
@@ -280,7 +337,7 @@
         .footer-dev-icons a.dev-call { background: #d93838; border-color: #ff5252; }
         .footer-dev-icons a:hover { transform: scale(1.1); }
 
-        @media (max-width: 760px) { nav, main { width: min(100% - 32px, 580px); } .links { display: none; } .hero { grid-template-columns: 1fr; gap: 15px; padding-top: 35px; } .visual { min-height: 330px; } .visual::before { width: 280px; height: 280px; } .heading { display: block; } .heading p { margin-top: 12px; } .cards, .menu { grid-template-columns: 1fr; } footer { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 25px; } .footer-dev { align-items: center; } }
+        @media (max-width: 760px) { nav, main { width: min(100% - 32px, 580px); } .links { display: none; } .hero { grid-template-columns: 1fr; gap: 15px; padding-top: 35px; } .visual { min-height: 330px; } .visual::before { width: 280px; height: 280px; } .heading { display: block; } .heading p { margin-top: 12px; } .cards { grid-template-columns: 1fr; } footer { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 25px; } .footer-dev { align-items: center; } }
     </style>
 </head>
 <body>
@@ -306,7 +363,13 @@
     </div>
 
     <nav aria-label="التنقل الرئيسي">
-        <a class="brand" href="#top"><span class="mark">BD</span><span>بن دهب<small>Dahab Coffee</small></span></a>
+        <a class="brand" href="#top">
+            <span class="mark">BD</span>
+            <span>
+                <span class="animated-brand-text">بن دهب</span>
+                <small>Dahab Coffee</small>
+            </span>
+        </a>
     </nav>
     <main id="top">
         <section class="hero">
@@ -318,12 +381,45 @@
                     <details class="menu-dropdown">
                         <summary class="button">شوف المنيو <i class="fa-solid fa-mug-hot" aria-hidden="true"></i></summary>
                         <div class="quick-menu">
-                            <a href="#menu">بن سادة</a>
-                            <a href="#menu">بن وسط</a>
-                            <a href="#menu">بن غامق</a>
+                            <!-- بن سادة -->
+                            <div class="submenu-container">
+                                <div class="submenu-trigger">
+                                    <span>بن سادة</span>
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i>
+                                </div>
+                                <div class="sub-dropdown">
+                                    <div><span>الكيلو:</span> 600 ج</div>
+                                    <div><span>النص:</span> 300 ج</div>
+                                    <div><span>الربع:</span> 150 ج</div>
+                                </div>
+                            </div>
+                            <!-- بن محوج -->
+                            <div class="submenu-container">
+                                <div class="submenu-trigger">
+                                    <span>بن محوج</span>
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i>
+                                </div>
+                                <div class="sub-dropdown">
+                                    <div><span>الكيلو:</span> 600 ج</div>
+                                    <div><span>النص:</span> 300 ج</div>
+                                    <div><span>الربع:</span> 150 ج</div>
+                                </div>
+                            </div>
+                            <!-- بن غامق -->
+                            <div class="submenu-container">
+                                <div class="submenu-trigger">
+                                    <span>بن غامق</span>
+                                    <i class="fa-solid fa-chevron-left" style="font-size: 0.75rem;"></i>
+                                </div>
+                                <div class="sub-dropdown">
+                                    <div><span>الكيلو:</span> 600 ج</div>
+                                    <div><span>النص:</span> 300 ج</div>
+                                    <div><span>الربع:</span> 150 ج</div>
+                                </div>
+                            </div>
+                            <a href="#products">نسكافية</a>
                         </div>
                     </details>
-                    <a class="underlined" href="#products">اكتشف اختياراتنا</a>
                 </div>
             </div>
             <!-- الفنجان الرئيسي في يسار الصفحة مع البخار الكثيف على الحافة -->
@@ -344,10 +440,9 @@
             </div>
         </section>
         <section class="section" id="products"><div class="heading"><div><p class="eyebrow">اختيارات بن دهب</p><h2>كل فنجان له حكاية.</h2></div><p>اختيارات محمصة بعناية لعشاق القهوة السادة والمظبوط والنسكافية.</p></div><div class="cards"><article class="card"><i class="fa-solid fa-seedling" aria-hidden="true"></i><h3>بن محوج</h3><p>خلطة متوازنة برائحة الحبهان وطعم غني يفضل في الذاكرة.</p></article><article class="card"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i><h3>بن سادة</h3><p>تحميص مضبوط لعشاق الطعم الصافي والقهوة ذات الشخصية.</p></article><article class="card"><i class="fa-solid fa-cloud" aria-hidden="true"></i><h3>نسكافية</h3><p>نسكافية كريمي وسريع التحضير، حلو في البيت أو المكتب.</p></article></div></section>
-        <section class="section" id="menu"><div class="heading"><div><p class="eyebrow">منيو بن دهب</p><h2>اختار فنجانك.</h2></div><p>كل الإضافات والنكهات المتاحة في بن دهب.</p></div><div class="menu"><div class="item"><strong>بن سادة</strong><span></span><b>متاح</b></div><div class="item"><strong>بن وسط</strong><span></span><b>متاح</b></div><div class="item"><strong>بن غامق</strong><span></span><b>متاح</b></div></div></section>
     </main>
 
-    <!-- الفوتر مع تعديل لون أيقونة الاتصال الخاصة بـ Mega-IT لتكون حمراء -->
+    <!-- الفوتر -->
     <footer id="contact">
         <a class="brand" href="#top"><span class="mark">BD</span><span>بن دهب<small>Dahab Coffee</small></span></a>
         
@@ -363,12 +458,12 @@
         <div class="footer-dev">
             <span>تم التصميم بواسطة Mega-IT</span>
             <div class="footer-dev-icons">
-                <a href="url?id=4" class="dev-wa" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://wa.me/201010255123" class="dev-wa" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
                 <a href="tel:01010255123" class="dev-call" title="اتصال" aria-label="اتصال"><i class="fa-solid fa-phone"></i></a>
             </div>
         </div>
     </footer>
 
-    <div class="contact-float" aria-label="التواصل مع بن دهب"><a class="call" href="tel:01012049471" aria-label="اتصل الآن"><i class="fa-solid fa-phone" aria-hidden="true"></i></a><a class="whatsapp" href="file:///C:/Users/MOHAMEDMEGA/Documents/GitHub/-Dahab.Coffee/url?id=3" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
+    <div class="contact-float" aria-label="التواصل مع بن دهب"><a class="call" href="tel:01012049471" aria-label="اتصل الآن"><i class="fa-solid fa-phone" aria-hidden="true"></i></a><a class="whatsapp" href="url?id=2" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
 </body>
 </html>
