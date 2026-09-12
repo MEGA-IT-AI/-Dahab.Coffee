@@ -55,12 +55,13 @@
             animation: shineAndPulse 1.5s ease-in-out infinite alternate;
         }
 
-        /* حاوية الصورة المتحركة */
+        /* حاوية الصورة المتحركة ودمج الخلفية البيضاء مع خلفية الصفحة */
         .animated-cup-img {
             width: 150px;
             height: 150px;
             object-fit: contain;
-            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+            mix-blend-mode: multiply; /* دمج الخلفية البيضاء تماماً مع لون الصفحة */
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
             animation: floatCup 3s ease-in-out infinite;
         }
 
@@ -286,8 +287,8 @@
     </style>
 </head>
 <body>
-    <!-- شاشة الترحيب مع الصورة المتحركة -->
-    <div class="welcome-screen">
+    <!-- شاشة الترحيب مع الصورة المتحركة ودمج الخلفية -->
+    <div class="welcome-screen" style="background: var(--dark);">
         <div class="welcome-content">
             <div class="welcome-text">بن دهب</div>
             <div class="welcome-subtext">قهوة تظبط مزاجك</div>
@@ -355,9 +356,9 @@
                     </details>
                 </div>
             </div>
-            <!-- الفنجان الرئيسي في منتصف الصفحة (بدون الشكل الدائري الخلفي وبحركة الطفو) -->
+            <!-- الفنجان الرئيسي في منتصف الصفحة بخلفية مدمجة مع الصفحة وحركة الطفو -->
             <div class="visual" aria-label="كوباية قهوة بن دهب">
-                <img src="logo.png" alt="كوباية قهوة بن دهب" class="animated-cup-img" style="width: 240px; height: 240px;">
+                <img src="logo.png" alt="كوباية قهوة بن دهب" class="animated-cup-img" style="width: 260px; height: 260px;">
             </div>
         </section>
         <section class="section" id="products"><div class="heading"><div><p class="eyebrow">اختيارات بن دهب</p><h2>كل فنجان له حكاية.</h2></div><p>اختيارات محمصة بعناية لعشاق القهوة السادة والمظبوط والنسكافية.</p></div><div class="cards"><article class="card"><i class="fa-solid fa-seedling" aria-hidden="true"></i><h3>بن محوج</h3><p>خلطة متوازنة برائحة الحبهان وطعم غني يفضل في الذاكرة.</p></article><article class="card"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i><h3>بن سادة</h3><p>تحميص مضبوط لعشاق الطعم الصافي والقهوة ذات الشخصية.</p></article><article class="card"><i class="fa-solid fa-cloud" aria-hidden="true"></i><h3>نسكافية</h3><p>نسكافية كريمي وسريع التحضير، حلو في البيت أو المكتب.</p></article></div></section>
@@ -374,7 +375,7 @@
             <p class="footer-address"><i class="fa-solid fa-location-dot"></i> العاشر من رمضان</p>
             <div class="footer-socials">
                 <a href="tel:01012049471" title="اتصل بنا" aria-label="اتصل بنا"><i class="fa-solid fa-phone"></i></a>
-                <a href="https://wa.me/201010255123" class="whatsapp" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://wa.me/201012049471" class="whatsapp" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
             <a href="tel:01012049471" class="footer-phone"><i class="fa-solid fa-phone"></i> 01012049471</a>
         </div>
@@ -388,6 +389,6 @@
         </div>
     </footer>
 
-    <div class="contact-float" aria-label="التواصل مع بن دهب"><a class="call" href="tel:01012049471" aria-label="اتصل الآن"><i class="fa-solid fa-phone" aria-hidden="true"></i></a><a class="whatsapp" href="file:///C:/Users/MOHAMEDMEGA/Documents/GitHub/-Dahab.Coffee/url?id=3" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
+    <div class="contact-float" aria-label="التواصل مع بن دهب"><a class="call" href="tel:01012049471" aria-label="اتصل الآن"><i class="fa-solid fa-phone" aria-hidden="true"></i></a><a class="whatsapp" href="https://wa.me/201012049471" target="_blank" rel="noopener" aria-label="واتساب"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a></div>
 </body>
 </html>
