@@ -237,53 +237,63 @@
         .card:nth-child(2) p { color: #ead7bd; }
         .card:nth-child(3) p { color: var(--dark); }
         
-        footer { margin-top: 80px; padding: 35px max(20px, calc((100% - 1120px) / 2)); background: var(--dark); color: var(--cream); display: flex; justify-content: space-between; align-items: center; gap: 20px; }
-        
-        .footer-center { text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        .footer-address { font-size: 1.15rem; font-weight: 700; color: var(--cream); display: inline-flex; align-items: center; gap: 6px; }
-        .footer-address i { color: var(--gold); font-size: 1.1rem; }
-        
-        .footer-socials { display: flex; gap: 12px; }
-        .footer-socials a { display: grid; place-items: center; width: 38px; height: 38px; border: 2px solid var(--gold); border-radius: 50%; background: var(--brown); color: var(--cream); font-size: 1rem; transition: transform 0.2s; }
-        .footer-socials a.whatsapp { background: #1eaa63; border-color: #1eaa63; }
-        .footer-socials a:hover { transform: scale(1.1); }
-        
-        .footer-phone { font-size: 1.1rem; font-weight: 700; color: var(--gold); display: inline-flex; align-items: center; gap: 6px; }
-        .footer-phone i { font-size: 1rem; }
-
-        .footer-dev {
-            display: flex;
+        /* تنسيقات الفوتر الجديدة */
+        footer { 
+            margin-top: 80px; 
+            padding: 35px max(20px, calc((100% - 1120px) / 2)); 
+            background: var(--dark); 
+            color: var(--cream); 
+            display: flex; 
             flex-direction: column;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #b5a495;
-            min-width: 150px;
+            align-items: center; 
+            justify-content: center; 
+            gap: 15px; 
+            text-align: center;
         }
-        .footer-dev span {
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .footer-dev-icons {
+
+        .footer-credits {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
-        .footer-dev-icons a {
-            display: grid;
-            place-items: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            font-size: 0.8rem;
-            color: #fff;
-            transition: transform 0.2s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .footer-dev-icons a.dev-wa { background: #1eaa63; }
-        .footer-dev-icons a.dev-call { background: #d93838; border-color: #ff5252; }
-        .footer-dev-icons a:hover { transform: scale(1.1); }
 
-        @media (max-width: 760px) { nav, main { width: min(100% - 32px, 580px); } .links { display: none; } .hero { grid-template-columns: 1fr; gap: 15px; padding-top: 35px; } .visual { min-height: 330px; } .heading { display: block; } .heading p { margin-top: 12px; } .cards { grid-template-columns: 1fr; } footer { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 25px; } .footer-dev { align-items: center; } }
+        .footer-credits img {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background-color: var(--gold);
+            color: var(--dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .footer-btn:hover {
+            transform: translateY(-3px);
+            background-color: var(--cream);
+            color: var(--brown);
+        }
+
+        @media (max-width: 760px) { 
+            nav, main { width: min(100% - 32px, 580px); } 
+            .links { display: none; } 
+            .hero { grid-template-columns: 1fr; gap: 15px; padding-top: 35px; } 
+            .visual { min-height: 330px; } 
+            .heading { display: block; } 
+            .heading p { margin-top: 12px; } 
+            .cards { grid-template-columns: 1fr; } 
+        }
     </style>
 </head>
 <body>
@@ -364,28 +374,14 @@
         <section class="section" id="products"><div class="heading"><div><p class="eyebrow">اختيارات بن دهب</p><h2>كل فنجان له حكاية.</h2></div><p>اختيارات محمصة بعناية لعشاق القهوة السادة والمظبوط والنسكافية.</p></div><div class="cards"><article class="card"><i class="fa-solid fa-seedling" aria-hidden="true"></i><h3>بن محوج</h3><p>خلطة متوازنة برائحة الحبهان وطعم غني يفضل في الذاكرة.</p></article><article class="card"><i class="fa-solid fa-mug-hot" aria-hidden="true"></i><h3>بن سادة</h3><p>تحميص مضبوط لعشاق الطعم الصافي والقهوة ذات الشخصية.</p></article><article class="card"><i class="fa-solid fa-cloud" aria-hidden="true"></i><h3>نسكافية</h3><p>نسكافية كريمي وسريع التحضير، حلو في البيت أو المكتب.</p></article></div></section>
     </main>
 
-    <!-- الفوتر -->
-    <footer id="contact">
-        <a class="brand" href="#top">
-            <img src="logo.png" alt="شعار بن دهب" class="custom-brand-logo">
-            <span>بن دهب<small>Dahab Coffee</small></span>
-        </a>
-        
-        <div class="footer-center">
-            <p class="footer-address"><i class="fa-solid fa-location-dot"></i> العاشر من رمضان</p>
-            <div class="footer-socials">
-                <a href="tel:01012049471" title="اتصل بنا" aria-label="اتصل بنا"><i class="fa-solid fa-phone"></i></a>
-                <a href="https://wa.me/201012049471" class="whatsapp" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-            </div>
-            <a href="tel:01012049471" class="footer-phone"><i class="fa-solid fa-phone"></i> 01012049471</a>
-        </div>
-
-        <div class="footer-dev">
-            <span>تم التصميم بواسطة Mega-IT</span>
-            <div class="footer-dev-icons">
-                <a href="https://wa.me/201010255123" class="dev-wa" target="_blank" rel="noopener" title="واتساب" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="tel:01010255123" class="dev-call" title="اتصال" aria-label="اتصال"><i class="fa-solid fa-phone"></i></a>
-            </div>
+    <!-- الفوتر المحدث -->
+    <footer>
+        <p>&copy; جميع الحقوق محفوظة - بن دهب</p>
+        <div class="footer-credits">
+            <span>تصميم بواسطة</span>
+            <img src="100.png" alt="شعار التصميم">
+            <a href="tel:01010255123" class="footer-btn" title="اتصال هاتفي"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://wa.me/201010255123" target="_blank" class="footer-btn" title="مراسلة عبر الواتساب"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </footer>
 
