@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فاتورة الطلب</title>
+    <!-- استدعاء مكتبة html2canvas لتحويل الفاتورة إلى صورة -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .receipt-container {
+            width: 100%;
+            max-width: 380px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: right;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px dashed #333;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+
+        .receipt-header h2 {
+            margin: 0 0 5px 0;
+            color: #8b0000;
+            font-size: 1.3rem;
+        }
+
+        .receipt-header p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .customer-details {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #333;
+            padding-bottom: 10px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .receipt-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .receipt-table th, .receipt-table td {
+            padding: 8px 4px;
+            text-align: right;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .receipt-table th {
+            color: #555;
+            font-weight: bold;
+        }
+
+        .receipt-total {
+            border-top: 2px dashed #333;
+            padding-top: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            color: #000;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 15px;
+        }
+
+        /* حاوية الأزرار أسفل الفاتورة مباشرة */
+        .actions-wrapper {
+            width: 100%;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+        }
+
+        .payment-notice {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border: 1px solid #ffeeba;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            line-height: 1.5;
+        }
+
+        .btn-main {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-main:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-download {
+            background-color: #007bff;
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شكل الفاتورة (الريست) -->
+    <div class="receipt-container" id="receiptCard">
+        <div class="receipt-header">
+            <h2>مطعم دهب</h2>
+            <p id="receiptDate">التاريخ: --/--/----</p>
+        </div>
+
+        <div class="customer-details" id="customerDetails">
+            جاري تحميل تفاصيل الطلب...
+        </div>
+
+        <table class="receipt-table">
+            <thead>
+                <tr>
+                    <th>الصنف</th>
+                    <th>الكمية</th>
+                    <th>السعر</th>
+                </tr>
+            </thead>
+            <tbody id="receiptItemsBody">
+                <!-- الأصناف -->
+            </tbody>
+        </table>
+
+        <div class="receipt-total">
+            <span>الإجمالي الكلي:</span>
+            <span id="receiptGrandTotal">0 ج.م</span>
+        </div>
+
+        <div class="footer-note">
+            شكراً لاختياركم مطعمنا! ❤️
+        </div>
+    </div>
+
+    <!-- الأزرار أسفل الفاتورة مباشرة -->
+    <div class="actions-wrapper">
+        <div class="payment-notice" id="noticeBox">
+            1️⃣ اضغط "تزيل صورة الفاتورة" أولاً<br>2️⃣ ثم اضغط "إرسال عبر الواتساب" وأرفق الصورة المرسلة
+        </div>
+
+        <button class="btn-main btn-download" onclick="downloadReceiptImage()">
+            تنزيل صورة الفاتورة 📥
+        </button>
+
+        <button class="btn-main" onclick="sendReceiptToWhatsApp()">
+            إرسال الفاتورة عبر الواتساب 📱
+        </button>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const savedOrder = JSON.parse(localStorage.getItem('currentOrder'));
+            
+            if (savedOrder) {
+                document.getElementById('receiptDate').innerText = "التاريخ: " + savedOrder.date;
+
+                let infoHTML = "";
+                if (savedOrder.tableNumber) infoHTML += `🪑 رقم التربيزة: ${savedOrder.tableNumber}<br>`;
+                if (savedOrder.userPhone) infoHTML += `📞 رقم التليفون: ${savedOrder.userPhone}<br>`;
+                if (savedOrder.userAddress) infoHTML += `📍 العنوان: ${savedOrder.userAddress}`;
+                document.getElementById('customerDetails').innerHTML = infoHTML || "طلب صالة مباشر";
+
+                let itemsHTML = "";
+                savedOrder.itemsList.forEach(item => {
+                    itemsHTML += `
+                        <tr>
+                            <td>${item.name} (${item.size})</td>
+                            <td>${item.qty}</td>
+                            <td>${item.itemTotal} ج</td>
+                        </tr>
+                    `;
+                });
+                document.getElementById('receiptItemsBody').innerHTML = itemsHTML;
+                document.getElementById('receiptGrandTotal').innerText = savedOrder.grandTotal + ' ج.م';
+            } else {
+                document.getElementById('customerDetails').innerHTML = "لا توجد تفاصيل طلب مسجلة حالياً.";
+            }
+        };
+
+        // دالة تنزيل الفاتورة كصورة PNG
+        function downloadReceiptImage() {
+            const receiptElement = document.getElementById('receiptCard');
+            html2canvas(receiptElement, { scale: 2 }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'Dahab-Receipt.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        // دالة إرسال الطلب مع تنبيه لإرفاق الصورة
+        function sendReceiptToWhatsApp() {
+            const savedOrder = JSON.parse(localStorage.getItem('currentOrder'));
+            const targetPhone = "201010255123";
+
+            if (!savedOrder) {
+                alert("لا توجد تفاصيل طلب مرسلة!");
+                return;
+            }
+
+            let text = `مرحباً، أود تأكيد الطلب التالي:\n`;
+            if (savedOrder.tableNumber) text += `رقم التربيزة: ${savedOrder.tableNumber}\n`;
+            text += `الإجمالي الكلي: ${savedOrder.grandTotal} ج.م\n(مرفق صورة الفاتورة)`;
+
+            const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(text)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+
+</body>
+</html>

@@ -27,7 +27,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            padding-bottom: 130px;
+            padding-bottom: 160px;
         }
 
         .container {
@@ -92,11 +92,6 @@
             min-height: 60px;
         }
 
-        .info-row input:focus, .info-row textarea:focus {
-            border-color: #25D366;
-            box-shadow: 0 0 5px rgba(37, 211, 102, 0.4);
-        }
-
         .menu-table {
             width: 100%;
             border-collapse: collapse;
@@ -145,84 +140,79 @@
             font-weight: bold;
             color: #333;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: background 0.2s;
         }
 
         .btn-qty:hover {
             background-color: #f0f0f0;
         }
 
+        /* شريط الأزرار السفلي الثابت */
         .bottom-buttons-wrapper {
             position: fixed;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 40px);
+            width: calc(100% - 30px);
             max-width: 600px;
             z-index: 1000;
             display: flex;
             flex-direction: column;
             gap: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+            backdrop-filter: blur(5px);
         }
 
         .payment-notice {
-            background-color: rgba(255, 243, 205, 0.95);
+            background-color: #fff3cd;
             color: #856404;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-size: clamp(0.75rem, 2.5vw, 0.85rem);
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: clamp(0.7rem, 2.3vw, 0.8rem);
             font-weight: bold;
             text-align: center;
             border: 1px solid #ffeeba;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
         .bottom-buttons-container {
             display: flex;
-            gap: 12px;
+            gap: 8px;
+            width: 100%;
         }
 
-        .whatsapp-float {
+        .action-btn {
             flex: 1;
-            background-color: #25D366;
             color: white;
             border: none;
-            border-radius: 30px;
-            padding: 14px 10px;
-            font-size: clamp(0.85rem, 3vw, 1.05rem);
+            border-radius: 25px;
+            padding: 12px 6px;
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.3s ease;
         }
 
-        .pay-float {
-            flex: 1;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            padding: 14px 10px;
-            font-size: clamp(0.85rem, 3vw, 1.05rem);
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
+        .btn-whatsapp { background-color: #25D366; }
+        .btn-pay { background-color: #007bff; }
+        .btn-receipt { background-color: #6c757d; }
 
-        .whatsapp-float:disabled {
+        .action-btn:disabled {
             background-color: #ccc;
             cursor: not-allowed;
             box-shadow: none;
             opacity: 0.7;
+        }
+
+        .action-btn:hover:not(:disabled) {
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
     </style>
 </head>
@@ -285,18 +275,19 @@
 </div>
 
 <div class="bottom-buttons-wrapper">
-    <!-- الملحوظة أعلى أزرار الإرسال والدفع -->
     <div class="payment-notice">
         ⚠️ في حالة دفع مبلغ الطلب، يرجى إرسال أسكرينة الدفع عبر الواتساب
     </div>
     
     <div class="bottom-buttons-container">
-        <button class="whatsapp-float" id="btnWhatsapp" onclick="sendToWhatsApp()" disabled>
-            ارسال الطلب 📱
+        <button class="action-btn btn-receipt" id="btnReceipt" onclick="goToReceiptPage()" disabled>
+            تنزيل الفاتورة 🖼️
         </button>
-        
-        <button class="pay-float" id="btnPay" onclick="processPayment()">
+        <button class="action-btn btn-pay" onclick="processPayment()">
             دفع الطلب 💳
+        </button>
+        <button class="action-btn btn-whatsapp" id="btnWhatsapp" onclick="goToReceiptPage()" disabled>
+            ارسال الطلب 📱
         </button>
     </div>
 </div>
@@ -311,7 +302,6 @@
         if (currentQty < 0) currentQty = 0;
 
         qtySpan.innerText = currentQty;
-        
         toggleSubmitButton();
     }
 
@@ -321,6 +311,7 @@
         const userAddress = document.getElementById('userAddress').value.trim();
         
         const btnWhatsapp = document.getElementById('btnWhatsapp');
+        const btnReceipt = document.getElementById('btnReceipt');
 
         const { itemsList } = calculateTotal();
         const hasItems = itemsList.length > 0;
@@ -329,7 +320,9 @@
         const hasDeliveryInfo = userPhone.length > 0 && userAddress.length > 0;
         const isFormValid = hasTable || hasDeliveryInfo;
         
-        btnWhatsapp.disabled = !(isFormValid && hasItems);
+        const canEnable = (isFormValid && hasItems);
+        btnWhatsapp.disabled = !canEnable;
+        btnReceipt.disabled = !hasItems;
     }
 
     function calculateTotal() {
@@ -353,8 +346,8 @@
         return { itemsList, grandTotal };
     }
 
-    function sendToWhatsApp() {
-        const targetPhone = "201010255123";
+    // دالة تخزين الطلب والانتقال إلى ملف receipt.html
+    function goToReceiptPage() {
         const tableNumber = document.getElementById('tableNumber').value.trim();
         const userPhone = document.getElementById('userPhone').value.trim();
         const userAddress = document.getElementById('userAddress').value.trim();
@@ -362,20 +355,24 @@
         const { itemsList, grandTotal } = calculateTotal();
 
         if (itemsList.length === 0) {
-            alert("يرجى اختيار كمية لصنف واحد على الأقل قبل الإرسال");
+            alert("يرجى اختيار صنف واحد على الأقل");
             return;
         }
 
-        let customerInfo = "";
-        if (tableNumber) customerInfo += `*رقم التربيزة:* ${tableNumber}\n`;
-        if (userPhone) customerInfo += `*رقم التليفون:* ${userPhone}\n`;
-        if (userAddress) customerInfo += `*العنوان:* ${userAddress}\n`;
+        // حفظ تفاصيل الطلب في التخزين المحلي للمتصفح
+        const orderData = {
+            tableNumber: tableNumber,
+            userPhone: userPhone,
+            userAddress: userAddress,
+            itemsList: itemsList,
+            grandTotal: grandTotal,
+            date: new Date().toLocaleDateString('ar-EG') + ' - ' + new Date().toLocaleTimeString('ar-EG', {hour: '2-digit', minute:'2-digit'})
+        };
 
-        const formattedItems = itemsList.map(item => `- ${item.name} (مقاس ${item.size}) | العدد: ${item.qty} | السعر: ${item.itemTotal} ج.م`).join('\n');
-        const message = `طلب جديد:\n${customerInfo}\n*الطلبات:*\n${formattedItems}\n\n*الإجمالي الكلي:* ${grandTotal} ج.م`;
+        localStorage.setItem('currentOrder', JSON.stringify(orderData));
 
-        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
+        // الانتقال لصفحة الفاتورة المستقلة
+        window.location.href = 'receipt.html';
     }
 
     function processPayment() {
