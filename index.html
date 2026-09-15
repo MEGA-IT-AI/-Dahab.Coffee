@@ -5,176 +5,265 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منيو المطعم</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* جعل صورة الخلفية متجاوبة 100% مع الشاشة والتكبير/التصغير */
+        body {
+            background-image: url('1.png');
+            background-size: 100% 100%; /* تتمدد وتصغر بنسبة 100% مع أبعاد المنيو والشاشة */
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
+
+        /* حاوية المنيو المتجاوبة */
         .container {
-            max-width: 500px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.93);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
         }
+
         .header-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
         }
+
         h1 {
             margin: 0;
             color: #333;
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 4vw, 1.6rem); /* حجم خط متجاوب */
         }
+
         .table-input-container {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
         }
+
         .table-input-container label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             color: #555;
             margin-bottom: 4px;
         }
+
         .table-input-container input {
-            width: 90px;
-            padding: 6px 10px;
+            width: 75px;
+            padding: 6px 8px;
             border: 1px solid #ccc;
             border-radius: 6px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-align: center;
             outline: none;
+            background-color: #fff;
         }
+
         .table-input-container input:focus {
             border-color: #25D366;
         }
-        .menu-card {
+        
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
             background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.08);
+            text-align: center;
         }
-        .item-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #d9534f;
-            margin-bottom: 10px;
+
+        .menu-table th {
+            background-color: #f1f1f1;
+            color: #333;
+            padding: 10px 6px;
+            font-size: clamp(0.8rem, 3vw, 0.95rem);
+            border-bottom: 2px solid #ddd;
         }
-        .item-details {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+
+        .menu-table td {
+            padding: 10px 6px;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+            font-size: clamp(0.8rem, 3vw, 0.95rem);
         }
-        .price {
-            font-weight: bold;
-            color: #28a745;
-        }
+
         .quantity-control {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
         }
+
         .btn-qty {
             background-color: #eee;
-            border: none;
-            width: 32px;
-            height: 32px;
+            border: 1px solid #ccc;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1rem;
+            line-height: 1;
             cursor: pointer;
             font-weight: bold;
         }
+
         .btn-qty:hover {
             background-color: #ddd;
         }
+        
+        /* زر الواتساب */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
-            left: 20px;
-            right: 20px;
-            max-width: 500px;
-            margin: 0 auto;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 600px;
             background-color: #25D366;
             color: white;
             border: none;
             border-radius: 30px;
-            padding: 15px;
-            font-size: 1.1rem;
+            padding: 14px;
+            font-size: 1.05rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            width: calc(100% - 40px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .whatsapp-float:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- الجزء العلوي: عنوان المنيو ورقم الطاولة على اليسار -->
     <div class="header-section">
         <h1>منيو المطعم</h1>
         <div class="table-input-container">
             <label for="tableNumber">رقم التربيزة:</label>
-            <input type="text" id="tableNumber" placeholder="أدخل الرقم">
+            <input type="text" id="tableNumber" placeholder="الرقم" oninput="toggleSubmitButton()">
         </div>
     </div>
 
-    <!-- صنف البيتزا -->
-    <div class="menu-card" id="item-1">
-        <div class="item-title" id="itemName">بيتزا</div>
-        <div class="item-details">
-            <span>المقاس: <strong id="itemSize">M</strong></span>
-            <span class="price"><span id="itemPrice">150</span> ج.م</span>
-        </div>
-        <div class="item-details">
-            <span>الكمية:</span>
-            <div class="quantity-control">
-                <button class="btn-qty" onclick="changeQty(-1)">-</button>
-                <span id="qtyValue" style="font-weight: bold;">1</span>
-                <button class="btn-qty" onclick="changeQty(1)">+</button>
-            </div>
-        </div>
-    </div>
+    <table class="menu-table">
+        <thead>
+            <tr>
+                <th>الصنف</th>
+                <th>المقاس</th>
+                <th>السعر</th>
+                <th>الكمية</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="menu-row" data-name="بيتزا" data-size="M" data-price="150">
+                <td>بيتزا</td>
+                <td>M</td>
+                <td>150 ج.م</td>
+                <td>
+                    <div class="quantity-control">
+                        <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                        <span class="qtyValue" style="font-weight: bold;">0</span>
+                        <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+            <tr class="menu-row" data-name="كريب فراخ" data-size="M" data-price="200">
+                <td>كريب فراخ</td>
+                <td>M</td>
+                <td>200 ج.م</td>
+                <td>
+                    <div class="quantity-control">
+                        <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+                        <span class="qtyValue" style="font-weight: bold;">0</span>
+                        <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 
-<!-- زر الواتساب الثابت -->
-<button class="whatsapp-float" onclick="sendToWhatsApp()">
+<button class="whatsapp-float" id="btnWhatsapp" onclick="sendToWhatsApp()" disabled>
     إرسال الطلب عبر الواتساب 📱
 </button>
 
 <script>
-    let quantity = 1;
+    function changeQty(button, amount) {
+        const row = button.closest('.menu-row');
+        const qtySpan = row.querySelector('.qtyValue');
+        let currentQty = parseInt(qtySpan.innerText);
+        
+        currentQty += amount;
+        if (currentQty < 0) currentQty = 0;
+        
+        qtySpan.innerText = currentQty;
+    }
 
-    function changeQty(amount) {
-        quantity += amount;
-        if (quantity < 1) quantity = 1;
-        document.getElementById('qtyValue').innerText = quantity;
+    function toggleSubmitButton() {
+        const tableNumber = document.getElementById('tableNumber').value.trim();
+        const btn = document.getElementById('btnWhatsapp');
+        
+        btn.disabled = tableNumber.length === 0;
     }
 
     function sendToWhatsApp() {
         const phone = "201010255123";
         const tableNumber = document.getElementById('tableNumber').value.trim();
-        const name = document.getElementById('itemName').innerText;
-        const size = document.getElementById('itemSize').innerText;
-        const price = document.getElementById('itemPrice').innerText;
-        const totalPrice = parseInt(price) * quantity;
+        
+        if (!tableNumber) return;
 
-        // التحقق من كتابة رقم الطاولة قبل الإرسال
-        if (!tableNumber) {
-            alert("يرجى إدخال رقم التربيزة أولاً");
-            document.getElementById('tableNumber').focus();
+        const rows = document.querySelectorAll('.menu-row');
+        let itemsList = [];
+        let grandTotal = 0;
+
+        rows.forEach(row => {
+            const name = row.getAttribute('data-name');
+            const size = row.getAttribute('data-size');
+            const price = parseInt(row.getAttribute('data-price'));
+            const qty = parseInt(row.querySelector('.qtyValue').innerText);
+
+            if (qty > 0) {
+                const itemTotal = price * qty;
+                grandTotal += itemTotal;
+                itemsList.push(`- ${name} (مقاس ${size}) | العدد: ${qty} | السعر: ${itemTotal} ج.م`);
+            }
+        });
+
+        if (itemsList.length === 0) {
+            alert("يرجى اختيار كمية لصنف واحد على الأقل قبل الإرسال");
             return;
         }
 
-        const message = `طلب جديد:\n- رقم التربيزة: ${tableNumber}\n- الصنف: ${name}\n- المقاس: ${size}\n- الكمية: ${quantity}\n- إجمالي السعر: ${totalPrice} ج.م`;
+        const message = `طلب جديد:\n*رقم التربيزة:* ${tableNumber}\n\n*الطلبات:*\n${itemsList.join('\n')}\n\n*الإجمالي الكلي:* ${grandTotal} ج.م`;
 
         const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
