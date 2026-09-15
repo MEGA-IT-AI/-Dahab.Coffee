@@ -17,7 +17,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* صورة خلفية متجاوبة 100% مع الشاشة والتكبير/التصغير */
         body {
             background-image: url('1.png');
             background-size: 100% 100%;
@@ -31,7 +30,6 @@
             padding-bottom: 90px;
         }
 
-        /* حاوية المنيو */
         .container {
             width: 100%;
             max-width: 600px;
@@ -43,7 +41,6 @@
             text-align: center;
         }
 
-        /* عنوان المنيو في المنتصف */
         h1 {
             margin: 0 0 15px 0;
             color: #8b0000;
@@ -51,49 +48,56 @@
             font-weight: 800;
         }
 
-        /* قسم رقم التربيزة متمركز بالمنتصف فوق الجدول */
-        .table-input-container {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+        /* قسم الإدخالات فوق المنيو */
+        .customer-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
             background: #fff5f5;
-            padding: 8px 18px;
-            border-radius: 30px;
+            padding: 15px 20px;
+            border-radius: 16px;
             border: 1px solid #ffccd5;
             margin-bottom: 20px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
         }
 
-        .table-input-container label {
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .info-row label {
             font-size: 0.95rem;
             font-weight: bold;
             color: #8b0000;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            white-space: nowrap;
         }
 
-        .table-input-container input {
-            width: 85px;
-            padding: 6px 10px;
+        .info-row input, .info-row textarea {
+            width: 100%;
+            padding: 8px 12px;
             border: 1px solid #dcdcdc;
-            border-radius: 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-align: center;
+            border-radius: 10px;
+            font-size: 0.95rem;
             outline: none;
             color: #333;
             background-color: #fff;
             transition: all 0.2s ease;
+            font-family: inherit;
         }
 
-        .table-input-container input:focus {
+        .info-row textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .info-row input:focus, .info-row textarea:focus {
             border-color: #25D366;
             box-shadow: 0 0 5px rgba(37, 211, 102, 0.4);
         }
         
-        /* جدول المنيو */
         .menu-table {
             width: 100%;
             border-collapse: collapse;
@@ -149,7 +153,6 @@
             background-color: #f0f0f0;
         }
         
-        /* زر الواتساب الثابت */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -187,10 +190,20 @@
 <div class="container">
     <h1>منيو المطعم</h1>
 
-    <!-- حقل رقم التربيزة متمركز فوق المنيو بأسلوب داهية أنيق -->
-    <div class="table-input-container">
-        <label for="tableNumber">🪑 رقم التربيزة:</label>
-        <input type="text" id="tableNumber" placeholder="أدخل الرقم" oninput="toggleSubmitButton()">
+    <!-- قسم بيانات العميل فوق الجدول -->
+    <div class="customer-info-section">
+        <div class="info-row">
+            <label for="tableNumber">🪑 رقم التربيزة:</label>
+            <input type="text" id="tableNumber" placeholder="رقم التربيزة" oninput="toggleSubmitButton()">
+        </div>
+        <div class="info-row">
+            <label for="userPhone">📞 رقم التليفون:</label>
+            <input type="tel" id="userPhone" placeholder="أدخل رقم التليفون" oninput="toggleSubmitButton()">
+        </div>
+        <div class="info-row">
+            <label for="userAddress">📍 العنوان:</label>
+            <textarea id="userAddress" placeholder="أدخل العنوان التفصيلي" oninput="toggleSubmitButton()"></textarea>
+        </div>
     </div>
 
     <!-- جدول المنيو -->
@@ -232,7 +245,7 @@
     </table>
 </div>
 
-<!-- زر إرسال الطلب -->
+<!-- زر الإرسال -->
 <button class="whatsapp-float" id="btnWhatsapp" onclick="sendToWhatsApp()" disabled>
     إرسال الطلب عبر الواتساب 📱
 </button>
@@ -249,18 +262,27 @@
         qtySpan.innerText = currentQty;
     }
 
+    // التحقق من كتابة رقم التربيزة + التليفون + العنوان لتفعيل الزر
     function toggleSubmitButton() {
         const tableNumber = document.getElementById('tableNumber').value.trim();
+        const userPhone = document.getElementById('userPhone').value.trim();
+        const userAddress = document.getElementById('userAddress').value.trim();
         const btn = document.getElementById('btnWhatsapp');
         
-        btn.disabled = tableNumber.length === 0;
+        if (tableNumber.length > 0 && userPhone.length > 0 && userAddress.length > 0) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true;
+        }
     }
 
     function sendToWhatsApp() {
-        const phone = "201010255123";
+        const targetPhone = "201010255123";
         const tableNumber = document.getElementById('tableNumber').value.trim();
+        const userPhone = document.getElementById('userPhone').value.trim();
+        const userAddress = document.getElementById('userAddress').value.trim();
         
-        if (!tableNumber) return;
+        if (!tableNumber || !userPhone || !userAddress) return;
 
         const rows = document.querySelectorAll('.menu-row');
         let itemsList = [];
@@ -284,9 +306,9 @@
             return;
         }
 
-        const message = `طلب جديد:\n*رقم التربيزة:* ${tableNumber}\n\n*الطلبات:*\n${itemsList.join('\n')}\n\n*الإجمالي الكلي:* ${grandTotal} ج.م`;
+        const message = `طلب جديد:\n*رقم التربيزة:* ${tableNumber}\n*رقم التليفون:* ${userPhone}\n*العنوان:* ${userAddress}\n\n*الطلبات:*\n${itemsList.join('\n')}\n\n*الإجمالي الكلي:* ${grandTotal} ج.م`;
 
-        const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     }
 </script>
