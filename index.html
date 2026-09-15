@@ -200,7 +200,7 @@
             transition: all 0.3s ease;
         }
 
-        .whatsapp-float:disabled, .pay-float:disabled {
+        .whatsapp-float:disabled {
             background-color: #ccc;
             cursor: not-allowed;
             box-shadow: none;
@@ -271,7 +271,8 @@
         ارسال الطلب 📱
     </button>
     
-    <button class="pay-float" id="btnPay" onclick="processPayment()" disabled>
+    <!-- زر دفع الطلب مفعل دائماً بدون خاصية disabled -->
+    <button class="pay-float" id="btnPay" onclick="processPayment()">
         دفع الطلب 💳
     </button>
 </div>
@@ -286,6 +287,8 @@
         if (currentQty < 0) currentQty = 0;
 
         qtySpan.innerText = currentQty;
+        
+        toggleSubmitButton();
     }
 
     function toggleSubmitButton() {
@@ -294,15 +297,16 @@
         const userAddress = document.getElementById('userAddress').value.trim();
         
         const btnWhatsapp = document.getElementById('btnWhatsapp');
-        const btnPay = document.getElementById('btnPay');
+
+        const { itemsList } = calculateTotal();
+        const hasItems = itemsList.length > 0;
 
         const hasTable = tableNumber.length > 0;
         const hasDeliveryInfo = userPhone.length > 0 && userAddress.length > 0;
-
         const isFormValid = hasTable || hasDeliveryInfo;
         
-        btnWhatsapp.disabled = !isFormValid;
-        btnPay.disabled = !isFormValid;
+        // زر الواتساب فقط يتم التحكم في تفعيله
+        btnWhatsapp.disabled = !(isFormValid && hasItems);
     }
 
     function calculateTotal() {
@@ -351,17 +355,8 @@
         window.open(whatsappUrl, '_blank');
     }
 
-    // دالة الدفع وإعادة التوجيه إلى InstaPay
     function processPayment() {
         const instaPayUrl = "https://ipn.eg/S/mohamedmostafa1248/instapay/2RVzYh";
-        const { itemsList, grandTotal } = calculateTotal();
-
-        if (itemsList.length === 0) {
-            alert("يرجى اختيار كمية لصنف واحد على الأقل قبل الدفع");
-            return;
-        }
-
-        // فتح رابط InstaPay في نافذة جديدة
         window.open(instaPayUrl, '_blank');
     }
 </script>
