@@ -142,7 +142,6 @@
             border-collapse: collapse;
             background: #242424;
             text-align: center;
-            min-width: 500px;
         }
 
         .menu-table th {
@@ -165,7 +164,7 @@
             text-align: right;
             padding-right: 10px !important;
             font-weight: bold;
-            width: 28%;
+            width: 40%;
         }
 
         .item-details {
@@ -281,11 +280,13 @@
             align-items: center;
             gap: 4px;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .btn-whatsapp { background-color: #25D366; }
         .btn-pay { background-color: #d4af37; color: #1a1a1a; }
         .btn-receipt { background-color: #444; color: #fff; }
+        .btn-back { background-color: #c0392b; color: #fff; flex: 0.6; }
 
         .action-btn:disabled {
             background-color: #333;
@@ -328,10 +329,8 @@
         <table class="menu-table">
             <thead>
                 <tr>
-                    <th style="width:28%">الصنف</th>
+                    <th style="width:40%">الصنف</th>
                     <th>سادة</th>
-                    <th>خضروات</th>
-                    <th>جبنة رومي</th>
                     <th>جبنة موتزاريلا</th>
                 </tr>
             </thead>
@@ -340,104 +339,78 @@
                 <tr class="menu-row" data-name="فراخ بانيه">
                     <td class="item-name-cell">فراخ بانيه</td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- سوسيس -->
                 <tr class="menu-row" data-name="سوسيس">
                     <td class="item-name-cell">سوسيس</td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- كفتة لحم -->
                 <tr class="menu-row" data-name="كفتة لحم">
                     <td class="item-name-cell">كفتة لحم</td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- برجر لحم -->
                 <tr class="menu-row" data-name="برجر لحم">
                     <td class="item-name-cell">برجر لحم</td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- سجق شرقى -->
                 <tr class="menu-row" data-name="سجق شرقى">
                     <td class="item-name-cell">سجق شرقى</td>
                     <td><div class="price-qty-box"><span class="price-tag">29 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="29">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- ناجتس -->
                 <tr class="menu-row" data-name="ناجتس">
                     <td class="item-name-cell">ناجتس</td>
                     <td><div class="price-qty-box"><span class="price-tag">29 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="29">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- فراخ كرسبى -->
                 <tr class="menu-row" data-name="فراخ كرسبى">
                     <td class="item-name-cell">فراخ كرسبى</td>
                     <td><div class="price-qty-box"><span class="price-tag">31 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="31">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- فراخ كنبوشه -->
                 <tr class="menu-row" data-name="فراخ كنبوشه">
                     <td class="item-name-cell">فراخ كنبوشه</td>
                     <td><div class="price-qty-box"><span class="price-tag">31 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="31">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- فراخ استربس -->
                 <tr class="menu-row" data-name="فراخ استربس">
                     <td class="item-name-cell">فراخ استربس</td>
                     <td><div class="price-qty-box"><span class="price-tag">34 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="34">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- سوبر كرانشى -->
                 <tr class="menu-row" data-name="سوبر كرانشى">
                     <td class="item-name-cell">سوبر كرانشى</td>
                     <td><div class="price-qty-box"><span class="price-tag">34 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="34">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- كوردن بلو -->
                 <tr class="menu-row" data-name="كوردن بلو">
                     <td class="item-name-cell">كوردن بلو</td>
                     <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- شاورما فراخ -->
                 <tr class="menu-row" data-name="شاورما فراخ">
                     <td class="item-name-cell">شاورما فراخ</td>
                     <td><div class="price-qty-box"><span class="price-tag">37 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="37">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- شيش طاووق -->
                 <tr class="menu-row" data-name="شيش طاووق">
                     <td class="item-name-cell">شيش طاووق</td>
                     <td><div class="price-qty-box"><span class="price-tag">37 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="37">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">38 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="38">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
             </tbody>
@@ -450,10 +423,8 @@
         <table class="menu-table">
             <thead>
                 <tr>
-                    <th style="width:28%">الصنف والتفاصيل</th>
+                    <th style="width:40%">الصنف والتفاصيل</th>
                     <th>سادة</th>
-                    <th>خضروات</th>
-                    <th>جبنة رومي</th>
                     <th>جبنة موتزاريلا</th>
                 </tr>
             </thead>
@@ -465,8 +436,6 @@
                         <span class="item-details">(بانيه + ناجتس)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- الوحش -->
@@ -476,8 +445,6 @@
                         <span class="item-details">(بانيه + كرسبى + كاتيوشة + هوت دوج)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">26 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="26">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">27 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="27">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- شطشوط -->
@@ -487,8 +454,6 @@
                         <span class="item-details">(كرسبى + كاتيوشة + استربس)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">29 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="29">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">30 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="30">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- الصاروخ -->
@@ -498,8 +463,6 @@
                         <span class="item-details">(بانيه + كرسبى + كاتيوشة + هوت دوج + برجر + كفتة + بطاطس)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">31 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="31">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- حبيشة -->
@@ -509,8 +472,6 @@
                         <span class="item-details">(بانيه + كرسبى + كاتيوشة + استربس + شيش + بطاطس)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">34 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="34">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">35 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="35">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
                 <!-- مافيا -->
@@ -520,8 +481,6 @@
                         <span class="item-details">(بانيه + كرسبى + كاتيوشة + استربس + شيش + كوردن بلو)</span>
                     </td>
                     <td><div class="price-qty-box"><span class="price-tag">32 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="سادة" data-price="32">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="خضروات" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
-                    <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة رومي" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                     <td><div class="price-qty-box"><span class="price-tag">33 ج.م</span><div class="quantity-control"><button class="btn-qty" onclick="changeQty(this, -1)">-</button><span class="qtyValue" data-type="جبنة موتزاريلا" data-price="33">0</span><button class="btn-qty" onclick="changeQty(this, 1)">+</button></div></div></td>
                 </tr>
             </tbody>
@@ -535,6 +494,10 @@
     </div>
     
     <div class="bottom-buttons-container">
+        <!-- زر الرجوع للخلف والتوجيه إلى index.html -->
+        <a href="index.html" class="action-btn btn-back" title="رجوع للخلف">
+            رجوع ↩️
+        </a>
         <button class="action-btn btn-receipt" id="btnReceipt" onclick="goToReceiptPage()" disabled>
             تنزيل الفاتورة 🖼️
         </button>
