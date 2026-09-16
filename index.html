@@ -33,6 +33,101 @@
             line-height: 1.6;
         }
 
+        /* Loading & Welcome Overlay */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(13, 13, 13, 0.98);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            pointer-events: auto;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-content {
+            text-align: center;
+            max-width: 450px;
+            padding: 20px;
+        }
+
+        .loader-logo {
+            font-size: 55px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .loader-welcome-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--light-text);
+            margin-bottom: 8px;
+        }
+
+        .loader-welcome-text {
+            color: var(--primary-color);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        .loader-spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(212, 175, 55, 0.2);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #242424;
+            height: 10px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #333;
+            margin-bottom: 12px;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #f39c12);
+            transition: width 0.05s linear;
+        }
+
+        .loader-counter {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--light-text);
+        }
+
         /* Header / Navbar */
         header {
             background-color: rgba(26, 26, 26, 0.95);
@@ -348,19 +443,41 @@
 </head>
 <body>
 
+    <!-- Loading & Welcome Overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <h2 class="loader-welcome-title">أهلاً بك في مطعم دهب</h2>
+            <p class="loader-welcome-text" id="loaderSubtext">جاري إعداد أشهى الأطباق لك...</p>
+            
+            <div class="loader-spinner"></div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="loader-counter"><span id="counter">1</span>%</div>
+        </div>
+    </div>
+
     <!-- Navigation Header -->
     <header>
         <div class="nav-container">
-            <a href="home.html" class="logo">
+            <!-- أيقونة وشعار الرئيسية توجه إلى index.html -->
+            <a href="index.html" class="logo btn-loader-trigger" data-target="index.html" data-text="جاري العودة للصفحة الرئيسية...">
                 <i class="fa-solid fa-crown"></i> مطعم دهب
             </a>
             <ul class="nav-links">
-                <li><a href="home.html">الرئيسية</a></li>
-                <li><a href="home2.html">طلبات أونلاين</a></li>
+                <!-- رابط الرئيسية في أعلى الصفحة يوجه إلى index.html -->
+                <li><a href="index.html" class="btn-loader-trigger" data-target="index.html" data-text="جاري تحضير الصفحة الرئيسية...">الرئيسية</a></li>
+                <li><a href="home2.html" class="btn-loader-trigger" data-target="home2.html" data-text="جاري فتح صفحة الطلبات أونلاين...">طلبات أونلاين</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="home.html" class="contact-btn"><i class="fa-solid fa-utensils"></i> المنيو</a>
-                <a href="home2.html" class="online-btn"><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
+                <!-- زر المنيو يوجه إلى home.html -->
+                <a href="home.html" class="contact-btn btn-loader-trigger" data-target="home.html" data-text="جاري تحميل قائمة الطعام (المنيو)..."><i class="fa-solid fa-utensils"></i> المنيو</a>
+                <a href="home2.html" class="online-btn btn-loader-trigger" data-target="home2.html" data-text="جاري التحويل لنظام الطلب الأونلاين..."><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
             </div>
         </div>
     </header>
@@ -370,8 +487,9 @@
         <h1>أهلاً بكم في مطعم دهب</h1>
         <p>طعم الذهبي الأصيل - أشهى أنواع الكريب والبيتزا والبرجر المحضر بأجود المكونات الطازجة</p>
         <div class="hero-btns">
-            <a href="home.html" class="cta-btn"><i class="fa-solid fa-utensils"></i> استكشف المنيو</a>
-            <a href="home2.html" class="cta-btn-online"><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
+            <!-- زر استكشف المنيو يوجه إلى home.html -->
+            <a href="home.html" class="cta-btn btn-loader-trigger" data-target="home.html" data-text="جاري تحميل المنيو كامل..."><i class="fa-solid fa-utensils"></i> استكشف المنيو</a>
+            <a href="home2.html" class="cta-btn-online btn-loader-trigger" data-target="home2.html" data-text="جاري التوجيه للطلب أونلاين..."><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
         </div>
     </section>
 
@@ -509,5 +627,64 @@
         </div>
     </footer>
 
+    <!-- JavaScript for Welcome & Loader Mechanism -->
+    <script>
+        const loaderOverlay = document.getElementById('loaderOverlay');
+        const counterElement = document.getElementById('counter');
+        const progressBar = document.getElementById('progressBar');
+        const loaderSubtext = document.getElementById('loaderSubtext');
+
+        // تشغيل العداد من 1 إلى 100
+        function startLoadingSequence(customText, targetUrl) {
+            if (customText) {
+                loaderSubtext.textContent = customText;
+            } else {
+                loaderSubtext.textContent = "أهلاً بك! جاري تجهيز تجربة مميزة لك...";
+            }
+
+            loaderOverlay.classList.remove('hidden');
+            let progress = 1;
+            counterElement.textContent = '1';
+            progressBar.style.width = '1%';
+
+            const interval = setInterval(() => {
+                progress += 2;
+                if (progress > 100) progress = 100;
+                
+                counterElement.textContent = progress;
+                progressBar.style.width = progress + '%';
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        if (targetUrl) {
+                            window.location.href = targetUrl;
+                        } else {
+                            // إذا كانت عند الفتح لأول مرة (لا يوجد رابط مستهدف) يتم إخفاء شاشة التحميل
+                            loaderOverlay.classList.add('hidden');
+                        }
+                    }, 250);
+                }
+            }, 20); // زيادة سرعة العداد بسلاسة
+        }
+
+        // 1. تشغيل رسالة الترحيب والعداد تلقائياً عند فتح الموقع لأول مرة
+        window.addEventListener('DOMContentLoaded', () => {
+            startLoadingSequence("أهلاً بك في مطعم دهب! جاري التحميل...", null);
+        });
+
+        // 2. ربط الأزرار (المنيو / طلبات أونلاين / الرئيسية) بشاشة التحميل والتحويل
+        document.querySelectorAll('.btn-loader-trigger').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const target = this.getAttribute('data-target') || this.getAttribute('href');
+                // إذا كان الرابط يوجه لنفس الصفحة index.html، نقوم بالتحميل بدلاً من التحديث الفوري
+                if (target) {
+                    e.preventDefault();
+                    const text = this.getAttribute('data-text');
+                    startLoadingSequence(text, target);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
