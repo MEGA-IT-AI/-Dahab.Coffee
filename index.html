@@ -283,41 +283,48 @@
             margin-bottom: 10px;
         }
 
-        /* Footer */
+        /* Footer Styles */
         footer {
             background-color: #0d0d0d;
             border-top: 1px solid #333;
-            padding: 40px 20px 20px 20px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-col h4 {
-            color: var(--primary-color);
-            font-size: 20px;
-            margin-bottom: 15px;
-        }
-
-        .footer-col p, .footer-col a {
-            color: var(--muted-text);
-            text-decoration: none;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 20px;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
             color: var(--muted-text);
             font-size: 14px;
+        }
+
+        .footer-credits {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-credits img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .footer-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #242424;
+            color: var(--light-text);
+            text-decoration: none;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .footer-btn:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
         }
 
         /* Responsive */
@@ -331,6 +338,11 @@
             .hero p {
                 font-size: 18px;
             }
+            footer {
+                flex-direction: column;
+                text-align: center;
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -339,15 +351,15 @@
     <!-- Navigation Header -->
     <header>
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="home.html" class="logo">
                 <i class="fa-solid fa-crown"></i> مطعم دهب
             </a>
             <ul class="nav-links">
-                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="home.html">الرئيسية</a></li>
                 <li><a href="home2.html">طلبات أونلاين</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="index.html" class="contact-btn"><i class="fa-solid fa-utensils"></i> المنيو</a>
+                <a href="home.html" class="contact-btn"><i class="fa-solid fa-utensils"></i> المنيو</a>
                 <a href="home2.html" class="online-btn"><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
             </div>
         </div>
@@ -358,7 +370,7 @@
         <h1>أهلاً بكم في مطعم دهب</h1>
         <p>طعم الذهبي الأصيل - أشهى أنواع الكريب والبيتزا والبرجر المحضر بأجود المكونات الطازجة</p>
         <div class="hero-btns">
-            <a href="index.html" class="cta-btn"><i class="fa-solid fa-utensils"></i> استكشف المنيو</a>
+            <a href="home.html" class="cta-btn"><i class="fa-solid fa-utensils"></i> استكشف المنيو</a>
             <a href="home2.html" class="cta-btn-online"><i class="fa-solid fa-cart-shopping"></i> طلبات أونلاين</a>
         </div>
     </section>
@@ -487,26 +499,13 @@
     </section>
 
     <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-col">
-                <h4>مطعم دهب</h4>
-                <p>وجهتك الأولى لأشهى الوجبات السريعة. خيارات متناسبة مع كافة الأذواق بأفضل جودة.</p>
-            </div>
-            <div class="footer-col">
-                <h4>روابط السريعة</h4>
-                <a href="index.html">الرئيسية</a>
-                <a href="home2.html">طلبات أونلاين</a>
-            </div>
-            <div class="footer-col">
-                <h4>تواصل معنا</h4>
-                <p><i class="fa-solid fa-phone"></i> 01000000000 / 01100000000</p>
-                <p><i class="fa-solid fa-location-dot"></i> شارع التحرير، وسط البلد، القاهرة</p>
-                <p><i class="fa-solid fa-clock"></i> يومياً من 11 صباحاً - 2 صباحاً</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 جميع الحقوق محفوظة لمطعم دهب.</p>
+    <footer>
+        <p>&copy;جميع الحقوق محفوظة - مطعم دهب  </p>
+        <div class="footer-credits">
+            <span>تصميم بواسطة</span>
+            <img src="100.png" alt="شعار التصميم">
+            <a href="tel:01010255123" class="footer-btn" title="اتصال هاتفي"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://wa.me/201010255123" target="_blank" class="footer-btn" title="مراسلة عبر الواتساب"><i class="fa-brands fa-whatsapp"></i></a>
         </div>
     </footer>
 
